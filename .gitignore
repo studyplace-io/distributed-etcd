@@ -1,6 +1,4 @@
 
-config
-app.yaml
 
 # Binaries for programs and plugins
 *.exe
@@ -10,7 +8,7 @@ app.yaml
 *.dylib
 bin
 testbin/*
-
+.DS_Store
 # Test binary, build with `go test -c`
 *.test
 
