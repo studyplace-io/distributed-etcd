@@ -23,7 +23,7 @@ type DistributeLocker struct {
 
 func NewDistributeLocker(lockerName string) *DistributeLocker {
 	l := &DistributeLocker{
-		etcdClient: client.EtcdClient(),
+		etcdClient: client.EtcdClient("../../config.yaml"),
 		lockerName: lockerName,
 	}
 	// 为锁生成session

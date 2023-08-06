@@ -1,4 +1,4 @@
-package main
+package leader_election
 
 import (
 	"bufio"
@@ -9,6 +9,7 @@ import (
 	"golanglearning/new_project/etcd-distributed/pkg/client"
 	"log"
 	"os"
+	"testing"
 )
 
 var (
@@ -16,10 +17,10 @@ var (
 	electName = flag.String("name", "my-test-elect", "election name")
 )
 
-func main() {
+func TestLeader(t *testing.T) {
 	flag.Parse()
 
-	cli := client.EtcdClient()
+	cli := client.EtcdClient("../../config.yaml")
 
 	// 为锁生成session
 	s1, err := concurrency.NewSession(cli)

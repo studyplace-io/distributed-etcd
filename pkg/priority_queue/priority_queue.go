@@ -19,7 +19,7 @@ type DistributePriorityQueue struct {
 
 func NewDistributePriorityQueue(queueName string) *DistributePriorityQueue {
 	dq := &DistributePriorityQueue{
-		etcdClient: client.EtcdClient(),
+		etcdClient: client.EtcdClient("../../config.yaml"),
 		QueueName: queueName,
 	}
 	dq.PriorityQueue = recipe.NewPriorityQueue(dq.etcdClient, queueName)

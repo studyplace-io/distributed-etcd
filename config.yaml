@@ -1,2 +1,2 @@
-endpoint: http://127.0.0.1:2379
-prefix: /etcd-test
+endpoint: http://127.0.0.1:2379 # etcd实例endpoint
+prefix: /etcd-test              # 前缀，目前没有使用

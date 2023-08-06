@@ -19,7 +19,7 @@ type DistributeBarrier struct {
 
 func NewDistributeBarrier(barrierName string) *DistributeBarrier {
 	dq := &DistributeBarrier{
-		etcdClient: client.EtcdClient(),
+		etcdClient: client.EtcdClient("../../config.yaml"),
 		BarrierName: barrierName,
 	}
 	dq.Barrier = recipe.NewBarrier(dq.etcdClient, barrierName)

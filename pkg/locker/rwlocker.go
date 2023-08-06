@@ -24,7 +24,7 @@ type DistributeRWLocker struct {
 
 func NewDistributeRWLocker(lockerName string) *DistributeRWLocker {
 	l := &DistributeRWLocker{
-		etcdClient: client.EtcdClient(),
+		etcdClient: client.EtcdClient("../../config.yaml"),
 		lockerName: lockerName,
 	}
 	// 为锁生成session

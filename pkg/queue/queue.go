@@ -19,7 +19,7 @@ type DistributeQueue struct {
 
 func NewDistributeQueue(queueName string) *DistributeQueue {
 	dq := &DistributeQueue{
-		etcdClient: client.EtcdClient(),
+		etcdClient: client.EtcdClient("../../config.yaml"),
 		QueueName: queueName,
 	}
 	dq.Queue = recipe.NewQueue(dq.etcdClient, queueName)
