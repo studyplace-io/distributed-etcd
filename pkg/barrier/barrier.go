@@ -11,15 +11,14 @@ import (
 type DistributeBarrier struct {
 	// etcdClient 客户端
 	etcdClient  *clientv3.Client
-	//
 	*recipe.Barrier
 	// BarrierName 名
 	BarrierName string
 }
 
-func NewDistributeBarrier(barrierName string) *DistributeBarrier {
+func NewDistributeBarrier(barrierName string, path string) *DistributeBarrier {
 	dq := &DistributeBarrier{
-		etcdClient: client.EtcdClient("../../config.yaml"),
+		etcdClient: client.EtcdClient(path),
 		BarrierName: barrierName,
 	}
 	dq.Barrier = recipe.NewBarrier(dq.etcdClient, barrierName)

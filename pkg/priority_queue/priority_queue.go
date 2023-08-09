@@ -17,9 +17,9 @@ type DistributePriorityQueue struct {
 	QueueName string
 }
 
-func NewDistributePriorityQueue(queueName string) *DistributePriorityQueue {
+func NewDistributePriorityQueue(queueName string, path string) *DistributePriorityQueue {
 	dq := &DistributePriorityQueue{
-		etcdClient: client.EtcdClient("../../config.yaml"),
+		etcdClient: client.EtcdClient(path),
 		QueueName: queueName,
 	}
 	dq.PriorityQueue = recipe.NewPriorityQueue(dq.etcdClient, queueName)

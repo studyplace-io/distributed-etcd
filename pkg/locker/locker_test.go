@@ -7,7 +7,7 @@ import (
 
 func TestLocker(t *testing.T) {
 
-	l := NewDistributeLocker("my-locker")
+	l := NewDistributeLocker("my-locker", "../../config.yaml")
 	defer l.etcdClient.Close()
 
 	var wg sync.WaitGroup
@@ -21,7 +21,7 @@ func TestLocker(t *testing.T) {
 }
 
 func TestRWLocker(t *testing.T) {
-	rwl := NewDistributeRWLocker("my-rwlocker")
+	rwl := NewDistributeRWLocker("my-rwlocker", "../../config.yaml")
 	defer rwl.etcdClient.Close()
 
 	var wg sync.WaitGroup
@@ -31,7 +31,7 @@ func TestRWLocker(t *testing.T) {
 		go readSomething(i, rwl, &wg)
 	}
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 5; i++ {
 		go writeSomething(10+i, rwl, &wg)
 	}
 

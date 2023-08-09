@@ -21,9 +21,9 @@ type DistributeLocker struct {
 	lockerName string
 }
 
-func NewDistributeLocker(lockerName string) *DistributeLocker {
+func NewDistributeLocker(lockerName string, path string) *DistributeLocker {
 	l := &DistributeLocker{
-		etcdClient: client.EtcdClient("../../config.yaml"),
+		etcdClient: client.EtcdClient(path),
 		lockerName: lockerName,
 	}
 	// 为锁生成session

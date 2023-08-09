@@ -9,7 +9,7 @@ import (
 )
 
 func TestPriorityQueue(t *testing.T) {
-	dq := NewDistributePriorityQueue("my-priority-queue")
+	dq := NewDistributePriorityQueue("my-priority-queue", "../../config.yaml")
 	defer dq.etcdClient.Close()
 
 	wg := &sync.WaitGroup{}

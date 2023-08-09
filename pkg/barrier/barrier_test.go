@@ -10,7 +10,7 @@ import (
 
 func TestDistributeBarrier(t *testing.T) {
 
-	bb := NewDistributeBarrier("my-barrier")
+	bb := NewDistributeBarrier("my-barrier", "../../config.yaml")
 
 	err := bb.Hold()
 	if err != nil {

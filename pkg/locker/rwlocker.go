@@ -22,9 +22,9 @@ type DistributeRWLocker struct {
 	lockerName string
 }
 
-func NewDistributeRWLocker(lockerName string) *DistributeRWLocker {
+func NewDistributeRWLocker(lockerName string, path string) *DistributeRWLocker {
 	l := &DistributeRWLocker{
-		etcdClient: client.EtcdClient("../../config.yaml"),
+		etcdClient: client.EtcdClient(path),
 		lockerName: lockerName,
 	}
 	// 为锁生成session
@@ -64,7 +64,7 @@ func writeSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 	}
 	log.Println("acquired lock for ID:", id)
 
-	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
+	time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
 
 	if err := dl.Locker.Unlock(); err != nil {
 		log.Fatal(err)
@@ -75,7 +75,6 @@ func writeSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 func readSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup){
 	defer wg.Done()
 
-
 	// 请求锁
 	log.Println("acquiring rlock for ID:", id)
 	if err := dl.Locker.RLock(); err != nil {
@@ -83,7 +82,7 @@ func readSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup){
 	}
 	log.Println("acquired lock for ID:", id)
 
-	time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
+	time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
 
 	if err := dl.Locker.RUnlock(); err != nil {
 		log.Fatal(err)

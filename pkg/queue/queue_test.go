@@ -9,7 +9,7 @@ import (
 )
 
 func TestQueue(t *testing.T) {
-	dq := NewDistributeQueue("my-queue")
+	dq := NewDistributeQueue("my-queue", "../../config.yaml")
 	defer dq.etcdClient.Close()
 
 	wg := &sync.WaitGroup{}
