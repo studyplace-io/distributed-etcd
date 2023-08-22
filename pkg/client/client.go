@@ -1,9 +1,8 @@
 package client
 
 import (
-	"log"
-
 	clientv3 "go.etcd.io/etcd/client/v3"
+	"log"
 )
 
 

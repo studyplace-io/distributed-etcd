@@ -3,7 +3,7 @@ package leader_election
 import (
 	"context"
 	"fmt"
-	"golanglearning/new_project/etcd-distributed/pkg/client"
+	"github.com/practice/etcd-distributed/pkg/client"
 	"log"
 	"sync"
 	"testing"

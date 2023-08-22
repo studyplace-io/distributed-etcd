@@ -1,4 +1,4 @@
-module golanglearning/new_project/etcd-distributed
+module github.com/practice/etcd-distributed
 
 go 1.18
 

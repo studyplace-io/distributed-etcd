@@ -1,10 +1,10 @@
 package locker
 
 import (
+	"github.com/practice/etcd-distributed/pkg/client"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/concurrency"
 	recipe "go.etcd.io/etcd/client/v3/experimental/recipes"
-	"golanglearning/new_project/etcd-distributed/pkg/client"
 	"log"
 	"math/rand"
 	"sync"

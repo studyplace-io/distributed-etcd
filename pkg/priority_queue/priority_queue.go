@@ -1,9 +1,9 @@
 package priority_queue
 
 import (
+	"github.com/practice/etcd-distributed/pkg/client"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	recipe "go.etcd.io/etcd/client/v3/experimental/recipes"
-	"golanglearning/new_project/etcd-distributed/pkg/client"
 )
 
 // DistributePriorityQueue 分布式优先队列
