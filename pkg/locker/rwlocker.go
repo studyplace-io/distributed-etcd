@@ -15,7 +15,7 @@ import (
 // 使用etcd中间件中转，可以支持多进程争抢锁
 type DistributeRWLocker struct {
 	// etcdClient 客户端
-	etcdClient  *clientv3.Client
+	etcdClient *clientv3.Client
 	// Locker 读写锁
 	Locker *recipe.RWMutex
 	// lockerName 名
@@ -24,7 +24,7 @@ type DistributeRWLocker struct {
 
 func NewDistributeRWLocker(lockerName string, path string) *DistributeRWLocker {
 	l := &DistributeRWLocker{
-		etcdClient: client.EtcdClient(path),
+		etcdClient: client.GetClientFromFileOrDie(path),
 		lockerName: lockerName,
 	}
 	// 为锁生成session
@@ -36,7 +36,6 @@ func NewDistributeRWLocker(lockerName string, path string) *DistributeRWLocker {
 
 	return l
 }
-
 
 func doSomething1(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 	defer wg.Done()
@@ -52,10 +51,8 @@ func doSomething1(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 	log.Println("released lock for ID:", id)
 }
 
-
 func writeSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 	defer wg.Done()
-
 
 	// 请求锁
 	log.Println("acquiring lock for ID:", id)
@@ -72,7 +69,7 @@ func writeSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 	log.Println("released lock for ID:", id)
 }
 
-func readSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup){
+func readSomething(id int, dl *DistributeRWLocker, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	// 请求锁

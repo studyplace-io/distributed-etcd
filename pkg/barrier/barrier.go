@@ -10,7 +10,7 @@ import (
 // 使用etcd中间件中转，可以支持多进程入队出队
 type DistributeBarrier struct {
 	// etcdClient 客户端
-	etcdClient  *clientv3.Client
+	etcdClient *clientv3.Client
 	*recipe.Barrier
 	// BarrierName 名
 	BarrierName string
@@ -18,7 +18,7 @@ type DistributeBarrier struct {
 
 func NewDistributeBarrier(barrierName string, path string) *DistributeBarrier {
 	dq := &DistributeBarrier{
-		etcdClient: client.EtcdClient(path),
+		etcdClient:  client.GetClientFromFileOrDie(path),
 		BarrierName: barrierName,
 	}
 	dq.Barrier = recipe.NewBarrier(dq.etcdClient, barrierName)

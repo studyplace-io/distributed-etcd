@@ -3,5 +3,5 @@ package client
 import "testing"
 
 func TestEtcdClient(t *testing.T) {
-	EtcdClient("../../config.yaml")
+	GetClientFromFileOrDie("../../config.yaml")
 }

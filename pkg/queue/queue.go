@@ -10,7 +10,7 @@ import (
 // 使用etcd中间件中转，可以支持多进程入队出队
 type DistributeQueue struct {
 	// etcdClient 客户端
-	etcdClient  *clientv3.Client
+	etcdClient *clientv3.Client
 	// 分布式队列
 	*recipe.Queue
 	// QueueName 名
@@ -19,8 +19,8 @@ type DistributeQueue struct {
 
 func NewDistributeQueue(queueName string, path string) *DistributeQueue {
 	dq := &DistributeQueue{
-		etcdClient: client.EtcdClient(path),
-		QueueName: queueName,
+		etcdClient: client.GetClientFromFileOrDie(path),
+		QueueName:  queueName,
 	}
 	dq.Queue = recipe.NewQueue(dq.etcdClient, queueName)
 	return dq

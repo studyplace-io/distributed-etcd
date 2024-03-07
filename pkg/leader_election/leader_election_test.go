@@ -14,10 +14,10 @@ func TestLeaderElection(t *testing.T) {
 
 	simulationProcess := func(myIdentity string) {
 		le, err := NewLeaderElection(LeaderElectionConfig{
-			EtcdClient: client.EtcdClient("../../config.yaml"),
+			EtcdClient:   client.GetClientFromFileOrDie("../../config.yaml"),
 			LeaseSeconds: 10,
 			ElectionName: "leader-election-test",
-			Identity: myIdentity,
+			Identity:     myIdentity,
 			Callbacks: LeaderCallbacks{
 				OnStartedLeading: func(ctx context.Context) {
 					log.Printf("OnStarted: %s is leader", myIdentity)
@@ -58,7 +58,5 @@ func TestLeaderElection(t *testing.T) {
 	}
 
 	wg.Wait()
-
-
 
 }

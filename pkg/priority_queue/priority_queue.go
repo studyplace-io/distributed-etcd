@@ -10,7 +10,7 @@ import (
 // 使用etcd中间件中转，可以支持多进程入队出队
 type DistributePriorityQueue struct {
 	// etcdClient 客户端
-	etcdClient  *clientv3.Client
+	etcdClient *clientv3.Client
 	// 分布式优先队列
 	*recipe.PriorityQueue
 	// QueueName 名
@@ -19,8 +19,8 @@ type DistributePriorityQueue struct {
 
 func NewDistributePriorityQueue(queueName string, path string) *DistributePriorityQueue {
 	dq := &DistributePriorityQueue{
-		etcdClient: client.EtcdClient(path),
-		QueueName: queueName,
+		etcdClient: client.GetClientFromFileOrDie(path),
+		QueueName:  queueName,
 	}
 	dq.PriorityQueue = recipe.NewPriorityQueue(dq.etcdClient, queueName)
 	return dq

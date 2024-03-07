@@ -14,7 +14,7 @@ import (
 // 使用etcd中间件中转，可以支持多进程争抢锁
 type DistributeLocker struct {
 	// etcdClient 客户端
-	etcdClient  *clientv3.Client
+	etcdClient *clientv3.Client
 	// Locker 锁
 	Locker sync.Locker
 	// lockerName 名
@@ -23,7 +23,7 @@ type DistributeLocker struct {
 
 func NewDistributeLocker(lockerName string, path string) *DistributeLocker {
 	l := &DistributeLocker{
-		etcdClient: client.EtcdClient(path),
+		etcdClient: client.GetClientFromFileOrDie(path),
 		lockerName: lockerName,
 	}
 	// 为锁生成session
@@ -36,7 +36,6 @@ func NewDistributeLocker(lockerName string, path string) *DistributeLocker {
 
 	return l
 }
-
 
 func doSomething(id int, dl *DistributeLocker, wg *sync.WaitGroup) {
 	defer wg.Done()

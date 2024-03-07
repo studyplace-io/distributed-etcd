@@ -20,7 +20,7 @@ var (
 func TestLeader(t *testing.T) {
 	flag.Parse()
 
-	cli := client.EtcdClient("../../config.yaml")
+	cli := client.GetClientFromFileOrDie("../../config.yaml")
 
 	// 为锁生成session
 	s1, err := concurrency.NewSession(cli)
